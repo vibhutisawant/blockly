@@ -2,7 +2,7 @@ os: linux-ppc64le
 language: node_js
 matrix:
   include:
-    - os: linux-ppc64le
+    - os: linux
       dist: trusty
       node_js: stable
       sudo: required
