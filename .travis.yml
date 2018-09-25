@@ -1,6 +1,3 @@
-os: 
- - linux
- - linux-ppc64le
 language: node_js
 matrix:
   include:
@@ -15,6 +12,14 @@ matrix:
     - os: osx
       node_js: stable
       osx_image: xcode8.3
+    - os: linux-ppc64le
+      dist: trusty
+      node_js: stable
+      sudo: required
+      addons:
+        apt:
+          packages:
+          - google-chrome-stable
 
 before_script:
   # Symlink closure library used by test/jsunit
@@ -22,6 +27,7 @@ before_script:
   - export DISPLAY=:99.0
   - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then ( tests/scripts/setup_linux_env.sh ) fi
   - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then ( tests/scripts/setup_osx_env.sh ) fi
+  - if [ "${TRAVIS_OS_NAME}" == "linux-ppc64le" ]; then ( tests/scripts/setup_linux_env.sh ) fi
   - sleep 2
 
 script:
